@@ -3,34 +3,59 @@
     border-radius: 1.0vw;
     overflow:hidden;
 }
-.test1 {
-    left:29vw;
-    top:3.125vw;
+.main1 {
+    top:2vw;
+    left:14vw;
     width:12vw;
-    height:18.75vw;
+    height:21vw;
 }
-.test2 {
-    left:35vw;
-    top:1.5625vw;
+.main2 {
+    top:1.5vw;
+    left:21vw;
+    width:13vw;
+    height:22vw;
+}
+.main3 {
+    top:1vw;
+    left:28vw;
     width:14vw;
-    height:21.875vw;
+    height:23vw;
 }
-.test3 {
+.main4 {
+    top:0.5vw;
+    left:35vw;
+    width:15vw;
+    height:24vw;
+}
+.main5 {
+    top:0vw;
     left:42vw;
     width:16vw;
     height:25vw;
 }
-.test4 {
-    left:51vw;
-    top:1.5625vw;
-    width:14vw;
-    height:21.875vw;
+.main6 {
+    top:0.5vw;
+    left:50vw;
+    width:15vw;
+    height:24vw;
 }
-.test5 {
-    left:59vw;
-    top:3.125vw;
+.main7 {
+    top:1vw;
+    left:58vw;
+    width:14vw;
+    height:23vw;
+}
+.main8 {
+    top:1.5vw;
+    left:66vw;
+    width:13vw;
+    height:22vw;
+}
+.main9 {
+    top:2vw;
+    left:74vw;
     width:12vw;
-    height:18.75vw;
+    height:21vw;
 }
 .image {
     width:100%;
