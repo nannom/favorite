@@ -33,6 +33,16 @@ async function moveto(n) {
         // main 클래스를 가진 div를 찾아서 innerHTML을 설정
         const mainDiv = document.querySelector('.main');
         if (mainDiv) {
+            const newUrl = chars[n]; // 상대 경로로 URL 변경
+            const newState = { additionalInformation: 'Updated URL with replaceState' };
+            const title = 'New URL Page';
+
+            try {
+                history.replaceState(newState, title, newUrl);
+                console.log('URL successfully updated to: ', newUrl);
+            } catch (error) {
+                console.error('Error updating URL: ', error);
+            }
             mainDiv.innerHTML = html;
         } else {
             console.error('main 클래스를 가진 div를 찾을 수 없습니다.');
