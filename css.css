@@ -1,3 +1,7 @@
+*{
+    margin:0 auto;
+    padding:0 auto;
+}
 .mainchar {
     position:absolute;
     border-radius: 1.0vw;
