@@ -95,7 +95,7 @@ window.addEventListener('popstate', (event) => {
             if(window.location.pathname == "/" + chars[n]) {
                 try {
         // 서버로부터 HTML 코드를 가져오기
-                    const response = await fetch('https://corexaen.com/' + chars[n]); // 서버의 URL을 실제 서버 URL로 대체하세요.
+                    const response = await fetch('https://corexaen.com/main.html'); // 서버의 URL을 실제 서버 URL로 대체하세요.
         
         // 요청이 성공적인지 확인
                     if (!response.ok) {
