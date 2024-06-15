@@ -38,7 +38,7 @@ async function moveto(n) {
             const title = 'New URL Page';
 
             try {
-                history.replaceState(newState, title, newUrl);
+                history.pushState(newState, title, newUrl);
                 console.log('URL successfully updated to: ', newUrl);
             } catch (error) {
                 console.error('Error updating URL: ', error);
