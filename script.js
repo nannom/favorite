@@ -88,14 +88,35 @@ async function loadmain() {
 }
 window.addEventListener('popstate', async (event) => {
     if(window.location.pathname == "/") {
-        loadmain();
+                try {
+        // 서버로부터 HTML 코드를 가져오기
+                    const response = await fetch('https://corexaen.com/main.html'); // 서버의 URL을 실제 서버 URL로 대체하세요.
+        
+        // 요청이 성공적인지 확인
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+        
+        // 텍스트 형식으로 응답을 받음
+                    const html = await response.text();
+        
+        // main 클래스를 가진 div를 찾아서 innerHTML을 설정
+                    const mainDiv = document.querySelector('.main');
+                    if (mainDiv) {
+                        mainDiv.innerHTML = html;
+                    } else {
+                        console.error('main 클래스를 가진 div를 찾을 수 없습니다.');
+                    }
+                } catch (error) {
+                    console.error('HTML을 로드하는 중 오류가 발생했습니다:', error);
+                }
     }
     else {
         for(var n = 0;n<chars.length;n++) {
             if(window.location.pathname == "/" + chars[n]) {
                 try {
         // 서버로부터 HTML 코드를 가져오기
-                    const response = await fetch('https://corexaen.com/main.html'); // 서버의 URL을 실제 서버 URL로 대체하세요.
+                    const response = await fetch('https://corexaen.com/' + chars[n]); // 서버의 URL을 실제 서버 URL로 대체하세요.
         
         // 요청이 성공적인지 확인
                     if (!response.ok) {
