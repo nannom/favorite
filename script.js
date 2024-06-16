@@ -86,7 +86,7 @@ async function loadmain() {
         console.error('HTML을 로드하는 중 오류가 발생했습니다:', error);
     }
 }
-window.addEventListener('popstate', (event) => {
+window.addEventListener('popstate', async (event) => {
     if(window.location.pathname == "/") {
         loadmain();
     }
