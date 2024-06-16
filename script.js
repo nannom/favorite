@@ -110,6 +110,7 @@ window.addEventListener('popstate', async (event) => {
                 } catch (error) {
                     console.error('HTML을 로드하는 중 오류가 발생했습니다:', error);
                 }
+                loadimage();
     }
     else {
         for(var n = 0;n<chars.length;n++) {
