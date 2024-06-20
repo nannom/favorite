@@ -36,16 +36,6 @@ async function loadcode() {
             // main 클래스를 가진 div를 찾아서 innerHTML을 설정
             const mainDiv = document.querySelector('#code' + i);
             if (mainDiv) {
-                const newUrl = chars[n]; // 상대 경로로 URL 변경
-                const newState = { additionalInformation: 'Updated URL with replaceState' };
-                const title = 'New URL Page';
-
-                try {
-                    history.pushState(newState, title, newUrl);
-                    console.log('URL successfully updated to: ', newUrl);
-                } catch (error) {
-                    console.error('Error updating URL: ', error);
-                }
                 mainDiv.innerText = html;
                 now_screen = n;
             }
