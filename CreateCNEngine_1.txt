@@ -1,0 +1,7 @@
+HCNE CreateCNEngine(LPCWSTR _title, int _width, int _height, int fps, int tps);
+//기본적인 화면을 만들어주는 함수
+//_title    타이틀
+//_width    가로길이
+//_height   세로길이
+//fps       화면 작동 속도 (frame per second)
+//tps       코드 작동 속도 (tick per second)
