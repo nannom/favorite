@@ -19,6 +19,14 @@ function loadimage() {
         }
     }
 }
+function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/ /g, "&nbsp;")
+                .replace(/\n/g, "<br>");
+        }
 function highlightWords(text) {
             // 주석
             text = text.replace(/\/\/.*$/gm, '<span class="comment">$&</span>');
@@ -61,7 +69,7 @@ async function loadcode() {
             // main 클래스를 가진 div를 찾아서 innerHTML을 설정
             const mainDiv = document.querySelector('#code' + i);
             if (mainDiv) {
-                mainDiv.innerHTML = highlightWords(html);
+                mainDiv.innerHTML = highlightWords(escapeHtml(html));
             }
             else {
                 console.error('main 클래스를 가진 div를 찾을 수 없습니다.');
