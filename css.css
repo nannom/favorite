@@ -88,7 +88,8 @@
 
         .code .html-tag,
         .code .double-quoted-string,
-        .code .single-quoted-string {
+        .code .single-quoted-string,
+        .code .angle-brackets {
             color: #d7ba7d; /* Orange color */
         }
 
