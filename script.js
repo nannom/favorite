@@ -28,7 +28,7 @@ function escapeHtml(unsafe) {
                 .replace(/\n/g, "<br>");
         }
 
-        function highlightWords(text) {
+function highlightWords(text) {
             // 주석
             text = text.replace(/\/\/.*$/gm, '<span class="comment">$&</span>');
 
@@ -63,6 +63,9 @@ function escapeHtml(unsafe) {
             // 전처리기 지시문
             text = text.replace(/#include\b/g, '<span class="preprocessor">$&</span>');
             text = text.replace(/#define\b/g, '<span class="preprocessor">$&</span>');
+
+            // <...> 사이의 내용
+            text = text.replace(/&lt;[^&]*&gt;/g, '<span class="angle-brackets">$&</span>');
 
             return text;
         }
