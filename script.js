@@ -68,7 +68,8 @@ function highlightWords(text) {
             text = text.replace(/&lt;[^&]*&gt;/g, '<span class="angle-brackets">$&</span>');
 
             // 함수 이름
-            text = text.replace(/&nbsp;([^&]*(&gt;[^&]*|.[^&]*)?)?(\w+)\s*(?=\()/g, '&nbsp;$1<span class="function-name">$3</span>');
+            text = text.replace(/&nbsp;(\w+)\s*(?=\()/g, '&nbsp;<span class="function-name">$1</span>');
+
 
 
 
