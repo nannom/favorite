@@ -42,12 +42,12 @@ function highlightWords(text) {
             text = text.replace(/\b\d+(\.\d+)?\b/g, '<span class="number">$&</span>');
 
             // 키워드
-            const keywords = ['auto', 'break', 'case', 'char', 'const', 'continue', 'default', 'do', 'double', 'else', 'enum', 'extern', 'float', 'for', 'goto', 'if', 'int', 'long', 'register', 'return', 'short', 'signed', 'sizeof', 'static', 'struct', 'switch', 'typedef', 'union', 'unsigned', 'void', 'volatile', 'while'];
+            const keywords = ['auto', 'break', 'case', 'char', 'const', 'continue', 'default', 'do', 'double', 'else', 'enum', 'extern', 'float', 'for', 'goto', 'if', 'int', 'long', 'register', 'return', 'short', 'signed', 'sizeof', 'static', 'struct', 'switch', 'typedef', 'union', 'unsigned', 'void', 'volatile', 'while','class',"public"];
             const keywordRegex = new RegExp(`\\b(${keywords.join('|')})\\b`, 'g');
             text = text.replace(keywordRegex, '<span class="keyword">$1</span>');
 
             // 타입
-            const types = ['int', 'char', 'float', 'double', 'void', 'short', 'long', 'unsigned', 'signed', 'struct', 'union', 'enum'];
+            const types = ['int', 'char', 'float', 'double', 'void', 'short', 'long', 'unsigned', 'signed', 'struct', 'union', 'enum','class'];
             const typeRegex = new RegExp(`\\b(${types.join('|')})\\b`, 'g');
             text = text.replace(typeRegex, '<span class="type">$1</span>');
 
@@ -68,7 +68,9 @@ function highlightWords(text) {
             text = text.replace(/&lt;[^&]*&gt;/g, '<span class="angle-brackets">$&</span>');
 
             // 함수 이름
-            text = text.replace(/&nbsp;(\w+)\s*(?=\()/g, '&nbsp;<span class="function-name">$1</span>');
+            text = text.replace(/&nbsp;([^&]*(>[^&]*|.[^&]*)?)?(\w+)\s*(?=\()/g, '&nbsp;$1<span class="function-name">$3</span>');
+
+
 
             return text;
         }
