@@ -66,3 +66,22 @@
     height:100%;
     object-fit:cover;
 }
+.code .keyword {
+            color: #569cd6;
+        }
+
+        .code .type {
+            color: #4ec9b0;
+        }
+
+        .code .string {
+            color: #ce9178;
+        }
+
+        .code .comment {
+            color: #6a9955;
+        }
+
+        .code .number {
+            color: #b5cea8;
+        }
