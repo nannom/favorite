@@ -1,0 +1,19 @@
+#include "cnengine.h"
+
+int main() {
+    HCNE engine = CreateCNEngine(L"title",1920,1080,20,60);
+    //   화면                    타이틀    가로 세로 tps fps
+    
+    HWRD world = GetWorld(engine);
+    //   화면 표시
+
+    //여기에 세팅 관련 코드 작성
+
+	while (IsWindowActive(engine)) {
+			SyncEngine(engine);
+            //화면 로딩
+
+            //여기에 루프할 코드 작성
+    }
+    DeleteCNEngine(engine);
+}
