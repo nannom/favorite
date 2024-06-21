@@ -9,11 +9,11 @@ int main() {
 
     //여기에 세팅 관련 코드 작성
 
-	while (IsWindowActive(engine)) {
-			SyncEngine(engine);
-            //화면 로딩
+    while (IsWindowActive(engine)) {
+	SyncEngine(engine);
+  	//화면 로딩
 
-            //여기에 루프할 코드 작성
+        //여기에 루프할 코드 작성
     }
     DeleteCNEngine(engine);
 }
