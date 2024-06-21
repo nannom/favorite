@@ -67,6 +67,9 @@ function highlightWords(text) {
             // <...> 사이의 내용
             text = text.replace(/&lt;[^&]*&gt;/g, '<span class="angle-brackets">$&</span>');
 
+            // 함수 이름
+            text = text.replace(/\b(\w+)\s*(?=\()/g, '<span class="function-name">$1</span>');
+
             return text;
         }
 async function loadcode() {
