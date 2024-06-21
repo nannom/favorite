@@ -20,9 +20,9 @@ function loadimage() {
     }
 }
 function escapeHtml(unsafe) {
-        return unsafe
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
                 .replace(/>/g, "&gt;")
                 .replace(/ /g, "&nbsp;")
                 .replace(/\n/g, "<br>");
@@ -68,7 +68,7 @@ function highlightWords(text) {
             text = text.replace(/&lt;[^&]*&gt;/g, '<span class="angle-brackets">$&</span>');
 
             // 함수 이름
-            text = text.replace(/\b(\w+)\s*(?=\()/g, '<span class="function-name">$1</span>');
+            text = text.replace(/&nbsp;(\w+)\s*(?=\()/g, '&nbsp;<span class="function-name">$1</span>');
 
             return text;
         }
