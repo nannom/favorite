@@ -19,6 +19,31 @@ function loadimage() {
         }
     }
 }
+function highlightWords(text) {
+            // 주석
+            text = text.replace(/\/\/.*$/gm, '<span class="comment">$&</span>');
+
+            // 멀티라인 주석
+            text = text.replace(/\/\*[\s\S]*?\*\//g, '<span class="comment">$&</span>');
+
+            // 문자열
+            text = text.replace(/"(?:\\.|[^"\\])*"/g, '<span class="string">$&</span>');
+
+            // 숫자
+            text = text.replace(/\b\d+(\.\d+)?\b/g, '<span class="number">$&</span>');
+
+            // 키워드
+            const keywords = ['auto', 'break', 'case', 'char', 'const', 'continue', 'default', 'do', 'double', 'else', 'enum', 'extern', 'float', 'for', 'goto', 'if', 'int', 'long', 'register', 'return', 'short', 'signed', 'sizeof', 'static', 'struct', 'switch', 'typedef', 'union', 'unsigned', 'void', 'volatile', 'while'];
+            const keywordRegex = new RegExp(`\\b(${keywords.join('|')})\\b`, 'g');
+            text = text.replace(keywordRegex, '<span class="keyword">$1</span>');
+
+            // 타입
+            const types = ['int', 'char', 'float', 'double', 'void', 'short', 'long', 'unsigned', 'signed', 'struct', 'union', 'enum'];
+            const typeRegex = new RegExp(`\\b(${types.join('|')})\\b`, 'g');
+            text = text.replace(typeRegex, '<span class="type">$1</span>');
+
+            return text;
+        }
 async function loadcode() {
     for(var i = 0;i<codes.length;i++) {
         try {
@@ -36,8 +61,7 @@ async function loadcode() {
             // main 클래스를 가진 div를 찾아서 innerHTML을 설정
             const mainDiv = document.querySelector('#code' + i);
             if (mainDiv) {
-                mainDiv.innerText = html;
-                now_screen = n;
+                mainDiv.innerHTML = highlightWords(html);
             }
             else {
                 console.error('main 클래스를 가진 div를 찾을 수 없습니다.');
