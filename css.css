@@ -96,3 +96,6 @@
         .code .preprocessor {
             color: #c586c0; /* Purple color */
         }
+        .code .function-name {
+            color: #dcdcaa; /* Yellow color */
+        }
