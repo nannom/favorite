@@ -2,7 +2,7 @@
 
 int main() {
     HCNE engine = CreateCNEngine(L"title",1920,1080,20,60);
-    //   화면                    타이틀    가로 세로 tps fps
+    //   화면                    타이틀    가로   세로 fps tps
     
     HWRD world = GetWorld(engine);
     //   화면 표시
