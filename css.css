@@ -55,7 +55,7 @@
     width:13vw;
     height:22vw;
 }
-.main9 {
+.main9 {ㅍ
     top:2vw;
     left:74vw;
     width:12vw;
@@ -84,4 +84,14 @@
 
         .code .number {
             color: #b5cea8;
+        }
+
+        .code .html-tag,
+        .code .double-quoted-string,
+        .code .single-quoted-string {
+            color: #d7ba7d; /* Orange color */
+        }
+
+        .code .preprocessor {
+            color: #c586c0; /* Purple color */
         }
