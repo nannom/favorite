@@ -20,12 +20,12 @@ function loadimage() {
     }
 }
 function escapeHtml(unsafe) {
-            return unsafe
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/ /g, "&nbsp;")
-                .replace(/\n/g, "<br>");
+    return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/ /g, "&nbsp;")
+            .replace(/\n/g, "<br>");
         }
 function highlightWords(text) {
             // 주석
