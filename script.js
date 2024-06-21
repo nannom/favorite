@@ -20,9 +20,9 @@ function loadimage() {
     }
 }
 function escapeHtml(unsafe) {
-            return unsafe
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
                 .replace(/>/g, "&gt;")
                 .replace(/ /g, "&nbsp;")
                 .replace(/\n/g, "<br>");
