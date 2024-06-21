@@ -1,6 +1,6 @@
 var chars = ["clara.html","ameliawatson.html","takanashihoshino.html","myoya.html","ichihime.html","lumine.html","gawrgura.html","miu.html","yoyo.html"]
 var images = ["main_clara.png","main_ameliawatson.png","main_takanashihoshino.png","main_myoya.png","main_ichihime.png","main_lumine.png","main_gawrgura.png","main_miu.png","main_yoyo.png"]
-var codes = ["helloworld.txt"]
+var codes = ["basic.txt","CreateCNEngine_1.txt"]
 var selected = 0;
 var now_screen = 0;
 function loadimage() {
@@ -20,9 +20,9 @@ function loadimage() {
     }
 }
 function escapeHtml(unsafe) {
-        return unsafe
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
                 .replace(/>/g, "&gt;")
                 .replace(/ /g, "&nbsp;")
                 .replace(/\n/g, "<br>");
