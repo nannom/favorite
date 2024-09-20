@@ -29,6 +29,11 @@ function escapeHtml(unsafe) {
         }
 
 function highlightWords(text) {
+            // 문자열 (큰따옴표)
+            text = text.replace(/&quot;[^&]*&quot;/g, '<span class="double-quoted-string">$&</span>');
+
+            // 문자열 (작은따옴표)
+            text = text.replace(/&#39;[^&]*&#39;/g, '<span class="single-quoted-string">$&</span>');
             // 주석
             text = text.replace(/\/\/.*$/gm, '<span class="comment">$&</span>');
 
@@ -52,17 +57,12 @@ function highlightWords(text) {
             text = text.replace(typeRegex, '<span class="type">$1</span>');
 
             //class
-            const types = ['HCNE', 'HWRD', ''];
+            const types = ['HCNE', 'HWRD'];
             const typeRegex = new RegExp(`\\b(${types.join('|')})\\b`, 'g');
             text = text.replace(typeRegex, '<span class="type">$1</span>');
             // HTML 태그
             text = text.replace(/&lt;[^&]*&gt;/g, '<span class="html-tag">$&</span>');
 
-            // 문자열 (큰따옴표)
-            text = text.replace(/&quot;[^&]*&quot;/g, '<span class="double-quoted-string">$&</span>');
-
-            // 문자열 (작은따옴표)
-            text = text.replace(/&#39;[^&]*&#39;/g, '<span class="single-quoted-string">$&</span>');
 
             // 전처리기 지시문
             text = text.replace(/#include\b/g, '<span class="preprocessor">$&</span>');
