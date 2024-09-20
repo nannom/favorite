@@ -51,6 +51,10 @@ function highlightWords(text) {
             const typeRegex = new RegExp(`\\b(${types.join('|')})\\b`, 'g');
             text = text.replace(typeRegex, '<span class="type">$1</span>');
 
+            //class
+            const types = ['HCNE', 'HWRD', ''];
+            const typeRegex = new RegExp(`\\b(${types.join('|')})\\b`, 'g');
+            text = text.replace(typeRegex, '<span class="type">$1</span>');
             // HTML 태그
             text = text.replace(/&lt;[^&]*&gt;/g, '<span class="html-tag">$&</span>');
 
@@ -68,7 +72,7 @@ function highlightWords(text) {
             text = text.replace(/&lt;[^&]*&gt;/g, '<span class="angle-brackets">$&</span>');
 
             // 함수 이름
-            text = text.replace(/&nbsp;(\w+)\s*(?=\()/g, '&nbsp;<span class="function-name">$1</span>');
+            text = text.replace(/(\w+)\s*(?=\()/g, '&nbsp;<span class="function-name">$1</span>');
 
 
 
