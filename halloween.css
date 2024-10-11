@@ -93,6 +93,9 @@ h1 {
 
 /* 반응형 디자인 */
 @media only screen and (max-width: 500px) {
+    body {
+        background-image: url('https://img.pikbest.com/origin/09/32/45/97BpIkbEsT3Ha.jpg!bw700'); 
+    }
     .container {
         padding: 15px;
     }
