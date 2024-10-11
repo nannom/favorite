@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #333;
+    color: white;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    background-image: url('https://www.transparenttextures.com/patterns/asfalt-light.png'); /* 배경 질감 추가 */
+    background-size: cover;
+}
+.container {
+    background-color: #282828;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    max-width: 500px;
+    margin: 20px auto;
+    position: relative;
+}
+h1 {
+    font-size: 1.8em; /* 폰트 크기 조정 */
+    color: #ff9800;
+    margin-bottom: 15px;
+    line-height: 1.4em; /* 줄 높이 조정 */
+}
+.header {
+    background-color: black;
+    color: white;
+    padding: 10px; /* 패딩 감소 */
+    border-radius: 15px;
+    border: 2px solid orange;
+}
+.event-details {
+    margin: 20px 0;
+    text-align: left;
+}
+.event-details p {
+    font-size: 1.2em;
+}
+.quiz-instructions {
+    background-color: #ffeb3b;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+.quiz-instructions p {
+    font-size: 1.1em;
+    margin: 5px 0;
+    color:black;
+}
+.quiz-ex {
+    background-color: black;
+    color: white;
+    padding: 10px; /* 패딩 감소 */
+    border-radius: 15px;
+    border: 2px solid yellow;
+}
+#quiz-background {
+    transition: all 1.0s ease;
+    overflow: hidden;
+}
+.quiz-ex-button {
+    width:100%;
+    height:100%;
+    font-size: 1.1em;
+    margin: 5px 0;
+    background-color: black;
+    color: white;
+    border:0;
+}
+.quiz-ex p {
+    font-size: 1.1em;
+    margin: 5px 0;
+}
+.highlight {
+    font-weight: bold;
+    color: white;
+}
+.quiz-instructions .highlight {
+    font-weight: bold;
+    color: red;
+}
+.quiz-ex .highlight {
+    font-weight: bold;
+    color: white;
+}
+/* 하단에 할로윈 장식 */
+.footer {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #f0f0f0;
+}
+
+/* 반응형 디자인 */
+@media only screen and (max-width: 500px) {
+    .container {
+        padding: 15px;
+    }
+    h1 {
+        font-size: 1.3em; /* 모바일용 폰트 크기 조정 */
+    }
+    .event-details p, .quiz-instructions p {
+        font-size: 1em;
+    }
+    .decoration {
+        width: 60px;
+        height: 60px;
+    }
+}
