@@ -4,105 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halloween Quiz Event</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #333;
-            color: white;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-            background-image: url('https://www.transparenttextures.com/patterns/asfalt-light.png'); /* 배경 질감 추가 */
-            background-size: cover;
-        }
-        .container {
-            background-color: #282828;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            max-width: 500px;
-            margin: 20px auto;
-            position: relative;
-        }
-        h1 {
-            font-size: 1.8em; /* 폰트 크기 조정 */
-            color: #ff9800;
-            margin-bottom: 15px;
-            line-height: 1.4em; /* 줄 높이 조정 */
-        }
-        .header {
-            background-color: black;
-            color: white;
-            padding: 10px; /* 패딩 감소 */
-            border-radius: 15px;
-            border: 2px solid orange;
-        }
-        .event-details {
-            margin: 20px 0;
-            text-align: left;
-        }
-        .event-details p {
-            font-size: 1.2em;
-        }
-        .quiz-instructions {
-            background-color: #ffeb3b;
-            padding: 15px;
-            border-radius: 10px;
-            border: 2px solid black;
-        }
-        .quiz-instructions p {
-            font-size: 1.1em;
-            margin: 5px 0;
-        }
-        .quiz-instructions .highlight {
-            font-weight: bold;
-            color: red;
-        }
-        /* 하단에 할로윈 장식 */
-        .footer {
-            margin-top: 20px;
-            font-size: 0.9em;
-            color: #f0f0f0;
-        }
-        /* 배경 장식 (호박과 유령) */
-        .decoration {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-        }
-        .pumpkin {
-            top: -40px;
-            left: -40px;
-        }
-        .ghost {
-            top: -40px;
-            right: -40px;
-        }
-
-        /* 반응형 디자인 */
-        @media only screen and (max-width: 500px) {
-            .container {
-                padding: 15px;
-            }
-            h1 {
-                font-size: 1.2em; /* 모바일용 폰트 크기 조정 */
-            }
-            .event-details p, .quiz-instructions p {
-                font-size: 1em;
-            }
-            .decoration {
-                width: 60px;
-                height: 60px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="halloween.css" />
 </head>
 <body>
 
 <div class="container">
 
-    <div class="header">
-        <h1>할로윈 수능 응원 간식 퀴즈 이벤트 🎃</h1> <!-- 제목 텍스트 조정 -->
+    <div class="header" id="header">
+        <h1>할로윈 수능 응원 간식 이벤트 🎃</h1> <!-- 제목 텍스트 조정 -->
     </div>
 
     <div class="event-details">
@@ -111,13 +20,71 @@
     </div>
 
     <div class="quiz-instructions">
-        <p>참여방법: <span class="highlight">퀴즈를 풀고</span> 맞추면 <span class="highlight">간식</span>을 받아가세요!</p>
+        <p>참여방법: <span class="highlight">퀴즈</span>를 풀고 <span class="highlight">간식</span>을 받아가세요!</p>
     </div>
-
+    <!--
+    <form action="quiz-ex.html" class="quiz-ex">
+        <input class="quiz-ex-button" value="예시 문제 풀기" type="submit">
+    </form>
+    -->
+    <div class="quiz-ex" id="quiz-button">
+        <p onclick="open_ex();"><span class="highlight">예시문제 풀기</span></p>
+        <div id="quiz-background" style="height:0;">
+            <div>
+                <h2>난이도 : <span class="highlight" style="color: aqua;">최하</span></h2>
+            </div>
+            <div>
+                <h3>크리스마스의 날자는?</h3>
+            </div>
+            <div>
+                <h2>난이도 : <span class="highlight" style="color: green;">하</span></h2>
+            </div>
+            <div>
+                <h3>직각삼각형에서 밑변의 제곱과 높이의 제곱을 더하면 빗변의 제곱이 된다는 수학 공식의 이름은?</h3>
+            </div>
+            <div>
+                <h2>난이도 : <span class="highlight" style="color: yellow;">중</span></h2>
+            </div>
+            <div>
+                <h3>가장 긴 영단어는?</h3>
+            </div>
+            <div>
+                <h2>난이도 : <span class="highlight" style="color: red;">상</span></h2>
+            </div>
+            <div>
+                <h3>DNA의 이중 나선 구조를 발견한 과학자 두 명은 누구인가요?</h3>
+            </div>
+            <div>
+                <h2>난이도 : <span class="highlight" style="color: #960000;">최상</span></h2>
+            </div>
+            <div>
+                <img src="https://blog.kakaocdn.net/dn/BeBft/btrhH7aczjB/fCDZyytelWtCk0Pep2NwK1/img.png" alt="아인슈타인 상자" style="width:100%;">
+                <h5>위 이미지는 아인슈타인이 불확정성의 원리의 반례를 만들기 위해 고안된 장치입니다<br>이 장치는 광자 1개의 무개와 시간을 동시에 측정 할 수 있어 불확정성의 원리에 위배됩니다<br>하지만 이 장치에는 큰 오류가 있습니다 그 오류를 1개 이상 찾아주세요.</h5>
+            </div>
+            
+        </div>
+    </div>
     <div class="footer">
         <p>많은 참여 부탁드려요! 🎃👻</p>
     </div>
 </div>
+<script>
+    var opened = false;
+    function open_ex() {
+        var quiz_header = document.getElementById('quiz-background');
+        if(opened) {
+            //quiz_header.style.transition = 0;
 
+            // 각 요소의 스타일 변경
+            quiz_header.style.height = '0px';
+            opened = false;
+        }
+        else {
+            //quiz_header.style.transition = 0;
+            quiz_header.style.height = '1300px';
+            opened = true;
+        }
+    }
+</script>
 </body>
 </html>
