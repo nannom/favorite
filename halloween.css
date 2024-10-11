@@ -5,7 +5,7 @@ body {
     margin: 0;
     padding: 20px;
     text-align: center;
-    background-image: url('https://www.transparenttextures.com/patterns/asfalt-light.png'); /* 배경 질감 추가 */
+    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20230617/pngtree-halloween-wallpapers-and-backgrounds-for-laptop-or-desktop-image_2968567.jpg'); /* 배경 질감 추가 */
     background-size: cover;
 }
 .container {
@@ -53,7 +53,7 @@ h1 {
     color: white;
     padding: 10px; /* 패딩 감소 */
     border-radius: 15px;
-    border: 2px solid yellow;
+    border: 2px solid green;
 }
 #quiz-background {
     transition: all 1.0s ease;
