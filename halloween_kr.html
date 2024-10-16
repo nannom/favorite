@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halloween Quiz Event</title>
+    <link rel="stylesheet" href="halloween.css" />
+    <link href="pumkin.ico" rel="icon" type="image/x-icon" />
+    <meta property="og:url" content="https://corexaen.com/">
+    <meta property="og:title" content="가평고등학고 할로윈 이벤트">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://img.pikbest.com/origin/09/32/45/97BpIkbEsT3Ha.jpg!bw700">
+    <meta property="og:description" content="가평고 3학년의 수능을 응원합니다">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header" id="header">
+        <h1>할로윈 수능 응원 간식 이벤트 🎃</h1> <!-- 제목 텍스트 조정 -->
+    </div>
+
+    <div class="event-details">
+        <p><strong>일시:</strong> 10월 31일 점심시간</p>
+        <p><strong>장소:</strong> 3층 복도 앞</p>
+    </div>
+
+    <div class="quiz-instructions">
+        <p><span class="highlight" style="color:rgb(126,173,207)">퀴즈</span>를 풀고 <span class="highlight" style="color:yellow">간식</span>을 받아가세요!</p>
+    </div>
+    <!--
+    <form action="quiz-ex.html" class="quiz-ex">
+        <input class="quiz-ex-button" value="예시 문제 풀기" type="submit">
+    </form>
+    -->
+    <div class="quiz-ex" id="quiz-button">
+        <p onclick="open_ex();"><span class="highlight">예시문제 풀기</span></p>
+        <div id="quiz-background" style="height:0;">
+            <div>
+                <h2>난이도 : <span class="highlight" style="color: aqua;">최하</span></h2>
+            </div>
+            <div>
+                <h3>크리스마스의 날자는?</h3>
+            </div>
+            <div>
+                <h2>난이도 : <span class="highlight" style="color: green;">하</span></h2>
+            </div>
+            <div>
+                <h3>직각삼각형에서 밑변의 제곱과 높이의 제곱을 더하면 빗변의 제곱이 된다는 수학 공식의 이름은?</h3>
+            </div>
+            <div>
+                <h2>난이도 : <span class="highlight" style="color: yellow;">중</span></h2>
+            </div>
+            <div>
+                <h3>가장 긴 영단어는?</h3>
+            </div>
+            <div>
+                <h2>난이도 : <span class="highlight" style="color: red;">상</span></h2>
+            </div>
+            <div>
+                <h3>DNA의 이중 나선 구조를 발견한 과학자 두 명은 누구인가요?</h3>
+            </div>
+            <div>
+                <h2>난이도 : <span class="highlight" style="color: #960000;">최상</span></h2>
+            </div>
+            <div>
+                <img src="https://blog.kakaocdn.net/dn/BeBft/btrhH7aczjB/fCDZyytelWtCk0Pep2NwK1/img.png" alt="아인슈타인 상자" style="width:100%;">
+                <h5>위 이미지는 아인슈타인이 불확정성의 원리의 반례를 만들기 위해 고안한 장치입니다<br>이 장치는 광자 1개의 무개와 시간을 동시에 측정 할 수 있어 불확정성의 원리에 위배됩니다<br>하지만 이 장치에는 큰 오류가 있습니다 그 오류를 1개 이상 찾아주세요.</h5>
+            </div>
+            
+        </div>
+    </div>
+    <div class="footer">
+        <p>많은 참여 부탁드려요! 🎃👻</p><a href="https://corexaen.com/"><p>English</p></a>
+    </div>
+</div>
+<script>
+    var opened = false;
+    function open_ex() {
+        var quiz_header = document.getElementById('quiz-background');
+        if(opened) {
+            //quiz_header.style.transition = 0;
+
+            // 각 요소의 스타일 변경
+            quiz_header.style.height = '0px';
+            opened = false;
+        }
+        else {
+            //quiz_header.style.transition = 0;
+            quiz_header.style.height = '1300px';
+            opened = true;
+        }
+    }
+</script>
+</body>
+</html>
