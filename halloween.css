@@ -11,7 +11,7 @@ body {
 .container {
     background-color: rgba(40,40,40,0.5);
     border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
     padding: 20px;
     max-width: 500px;
     margin: 20px auto;
@@ -20,7 +20,7 @@ body {
 h1 {
     font-size: 1.8em; /* 폰트 크기 조정 */
     color: #000000;
-    text-shadow: 0 0 20px rgba(126,173,207,0.7);
+    text-shadow: 0 0 20px rgb(126,173,207);
     margin-bottom: 15px;
     line-height: 1.4em; /* 줄 높이 조정 */
 }
