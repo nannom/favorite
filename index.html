@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>윷놀이</title>
+        <link rel="stylesheet" href="yutgame.css">
+    </head>
+    <body style="margin:0;background-color: gray;">
+        <div id="overlay" class="overlay"></div>
+        <div id="loginModal" class="login-modal">
+            <h2>로그인</h2>
+            <h4 onclick="closeLogin();showSignup();">회원가입</h4>
+            <form id="loginForm">
+                <label for="username">닉네임:</label>
+                <input type="text" id="loginusername" name="loginusername" required>
+                <label for="password">비밀번호:</label>
+                <input type="password" id="loginpassword" name="loginpassword" required>
+                <button type="submit">로그인</button>lobbymode
+            </form>
+        </div>
+        <div id="signupModal" class="signup-modal">
+            <h2>회원가입</h2>
+            <h4 onclick="closeSignup();showLogin();">로그인</h4>
+            <form id="signupForm">
+                <label for="username">닉네임:</label>
+                <input type="text" id="signupusername" name="signupusername" required>
+                <label for="password">비밀번호:</label>
+                <input type="password" id="signuppassword" name="signuppassword" required>
+                <label for="password">비밀번호 확인:</label>
+                <input type="password" id="signuppassword2" name="signuppassword2" required>
+                <button type="submit">회원가입</button>
+            </form>
+        </div>
+        <div id="makeroomModal" class="makeroom-modal">
+            <h2>방 생성</h2>
+            <form id="makeroomForm">
+                <label for="username">방 이름:</label>
+                <input type="text" id="makeroomname" name="makeroomname" required>
+                <button type="submit">생성</button>
+                <button onclick="closeOverlay();closemakeroom();" class="cancel">취소</button>
+            </form>
+        </div>
+        <!--
+        <div id="characterModal" class="character-modal">
+            <h2>캐릭터</h2>
+            <form id="characterForm">
+                <input type="radio" name="char" value="1">
+                <input type="radio" name="char" value="2">
+                <input type="radio" name="char" value="3">
+                <input type="radio" name="char" value="4">
+                <button type="submit">생성</button>
+                <button onclick="closeOverlay();closecharacter();" class="cancel">취소</button>
+            </form>
+        </div>
+        -->
+        <div style="height:2.25vw;">
+            <div align="center" class="logout" onclick='setCookie("uid","0",-1);location.reload();'>로그아웃</div>
+        </div>
+        <canvas width="1600" height="900" id="gameCanvas" style="width: 80vw;height: 45vw; margin-top: 0vw;margin-left: 10vw; background-color: white; border-radius: 1vw;"></canvas>
+        <script src="yutgame.js"></script>
+    </body>
+</html>
