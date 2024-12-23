@@ -2,7 +2,11 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 ctx.lineCap = 'round';  // 선 끝을 둥글게
 ctx.lineJoin = 'round'; // 선 교차 부분을 둥글게
-var yuts = [false,true,false,true];
+var yuts = [true,true,true,true];
+let yutname = ["","도","개","걸","윷","모","빽도"];
+let anotheryut = new Array(31).fill(0);
+let yutboardcursor = -1;
+let selectedhorse = -1;
 function drawRoundedRectangle(x, y, width, height, radius) {
     ctx.beginPath();
     ctx.moveTo(x + radius, y); // 시작점
@@ -28,8 +32,9 @@ function drawRoundedRectangle(x, y, width, height, radius) {
     ctx.fill(); // 채우기 (선택 사항)
 }
 function drawyutboard() {
+    ctx.strokeStyle = '#FFC14F';
     ctx.fillStyle = "#FFC14F";
-    drawRoundedRectangle(37.5,37.5,825,825,20);
+    drawRoundedRectangle(38,38,826,826,20);
     ctx.strokeStyle = "#C66121";
     ctx.lineWidth = 2;
     ctx.beginPath();
@@ -100,6 +105,71 @@ function drawyutboard() {
     ctx.arc(450,450,25,0,Math.PI * 2);
     ctx.fill();
 }
+function drawOctagon(centerX, centerY, width) {
+    const sides = 8; // 팔각형은 8변
+    const angle = Math.PI * 2 / sides; // 각도 계산
+
+    // 팔각형의 꼭짓점 계산
+    const points = [];
+    for (let i = 0; i < sides; i++) {
+        const x = centerX + width * Math.cos(i * angle);
+        const y = centerY + width * Math.sin(i * angle);
+        points.push({ x, y });
+    }
+
+    // 정팔각형 그리기
+    ctx.beginPath();
+    ctx.moveTo(points[0].x, points[0].y);
+    for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(points[i].x, points[i].y);
+    }
+    ctx.closePath();
+    ctx.fill();  // 팔각형 내부를 채움
+    ctx.stroke();  // 외곽선 그리기
+}
+function seededRandomGenerator(seed) {
+    let currentSeed = seed % 2147483647;
+    if (currentSeed <= 0) currentSeed += 2147483646;
+
+    return function() {
+        currentSeed = (currentSeed * 16807) % 2147483647;
+        return (currentSeed - 1) / 2147483646;
+    };
+}
+let pos0rand = seededRandomGenerator(13324248123);
+function drawhorse(position) {
+    if(position == -1) {
+
+    }
+    else if(position == 0) {
+        drawOctagon(450 + (pos0rand() * 80 - 40),670 + (pos0rand() * 80 - 40),20);
+        anotheryut[0] += 1;
+    }
+    else if(position <= 4) {
+        drawOctagon(825,825 - (150 * (position)) + (anotheryut[position] * 5),20);
+        anotheryut[position] += 1;
+    }
+    else if(position<=9) {
+        drawOctagon(825 - (150 * (position - 5)),75 + (anotheryut[position] * 5),20);
+        anotheryut[position] += 1;
+    }
+    else if(position<=14) {
+        drawOctagon(75,75 + (150 * (position - 10)) + (anotheryut[position] * 5),20);
+        anotheryut[position] += 1;
+    }
+    else if(position<=20) {
+        drawOctagon(75 + (150 * (position - 15)),825 + (anotheryut[position] * 5),20);
+        anotheryut[position] += 1;
+    }
+    else if(position<=25) {
+        drawOctagon(825 - (125 * (position - 20)),75 + (125 * (position - 20)) + (anotheryut[position] * 5),20);
+        anotheryut[position] += 1;
+    }
+    else if(position<=30) {
+        drawOctagon(75 + (125 * (position - 25)),75 + (125 * (position - 25)) + (anotheryut[position] * 5),20);
+        anotheryut[position] += 1;
+    }
+}
 function drawyut() {
     for(var i = 0;i<4;i++) {
         ctx.lineWidth = 1;
@@ -155,6 +225,8 @@ function setCookie(name, value, days) {
 let datas = {};
 let lobby_button_hover = false;
 let lobby_charater_hover = false;
+let room_out_hover = false;
+let room_start_hover = false;
 canvas.addEventListener("mousemove",(event) => {
     const rect = canvas.getBoundingClientRect();
     const cssX = event.clientX - rect.left;
@@ -167,10 +239,12 @@ canvas.addEventListener("mousemove",(event) => {
     // 논리 캔버스 좌표 계산
     const canvasX = cssX * scaleX;
     const canvasY = cssY * scaleY;
+    lobby_button_hover = false;
+    lobby_charater_hover = false;
+    document.body.style.cursor = "default";
+    room_out_hover = false;
+    room_start_hover = false;
     if(datas.state == 1) {
-        lobby_button_hover = false;
-        lobby_charater_hover = false;
-        document.body.style.cursor = "default";
         if(204 <= canvasX && canvasX <= 296 && 54 <= canvasY && canvasY <= 86) {
             lobby_button_hover = true;
             document.body.style.cursor = "pointer";
@@ -190,6 +264,171 @@ canvas.addEventListener("mousemove",(event) => {
         }
 
         drawlobby(datas);
+    }
+    else if(datas.state == 2) {
+        if(1445 <= canvasX && canvasX <= 1595 && 5 <= canvasY && canvasY <= 45) {
+            document.body.style.cursor = "pointer";
+            room_out_hover = true;
+        }
+        if(room_out_hover) {
+            ctx.fillStyle = "#FF5555";
+        }
+        else {
+            ctx.fillStyle = "#FF2222";
+        }
+        drawRoundedRectangle(1445,5,150,40,20);
+        ctx.fillStyle = '#000000';
+        ctx.font = "25px Arial";         // 폰트 크기와 스타일
+        ctx.textAlign = "center";        // 정렬: left, center, right, start, end
+        ctx.fillText("나가기",1520,35);
+        if(1290 <= canvasX && canvasX <= 1440 && 5 <= canvasY && canvasY <= 45) {
+            document.body.style.cursor = "pointer";
+            room_start_hover = true;
+            ctx.fillStyle = '#66FF66';
+        }
+        else {
+            ctx.fillStyle = '#00FF00';
+        }
+        let isowner = false;
+        datas.players.forEach(({name,roles}) => {
+            if(roles == 'leader') {
+                if(name == datas.username) {
+                    isowner = true;
+                }
+            }
+        });
+        if(isowner) {
+            drawRoundedRectangle(1290,5,150,40,20);
+            ctx.fillStyle = '#000000';
+            ctx.font = "25px Arial";         // 폰트 크기와 스타일
+            ctx.textAlign = "center";        // 정렬: left, center, right, start, end
+            ctx.fillText("게임 시작",1365,35);
+        }
+    }
+    else if(datas.state == 3) {
+        if(1100 <= canvasX && canvasX <= 1550 && 380 <= canvasY && canvasY <= 460) {
+            if(datas.turn[0].name == datas.username && datas.game.state == 0) {
+                document.body.style.cursor = "pointer";16,0,Math.PI * 2
+            }
+            else {
+                document.body.style.cursor = "not-allowed";
+            }
+        }
+        yutboardcursor = -1;
+        function ishere(x,y,width) {
+            return (x - (width / 2) <= canvasX && canvasX <= x + (width / 2) && y - (width / 2) <= canvasY && canvasY <= y + (width / 2))
+        }
+        if(ishere(450,670,80)) {
+            yutboardcursor = 0;
+        }
+        for(let i = 1;i<=30;i++) {
+            if(i <= 4) {
+                if(ishere(825,825 - (150 * (i)),20)) {
+                    yutboardcursor = i;
+                    break;
+                }
+            }
+            else if(i<=9) {
+                if(ishere(825 - (150 * (i - 5)),75,20)) {
+                    yutboardcursor = i;
+                    break;
+                }
+            }
+            else if(i<=14) {
+                if(ishere(75,75 + (150 * (i - 10)),20)) {
+                    yutboardcursor = i;
+                    break;
+                }
+            }
+            else if(i<=20) {
+                if(ishere(75 + (150 * (i - 15)),825,20)) {
+                    yutboardcursor = i;
+                    break;
+                }
+            }
+            else if(i<=25) {
+                if(ishere(825 - (125 * (i - 20)),75 + (125 * (i - 20)),20)) {
+                    yutboardcursor = i;
+                    break;
+                }
+            }
+            else if(i<=30) {
+                if(ishere(75 + (125 * (i - 25)),75 + (125 * (i - 25)),20)) {
+                    yutboardcursor = i;
+                    break;
+                }
+            }
+        }
+        drawyutboard();
+        anotheryut.fill(0);
+        pos0rand = seededRandomGenerator(13324248123);
+        ctx.lineWidth = 2;
+        datas.horses1.forEach(({where}) => {
+            ctx.fillStyle = '#0000FF';
+            if(yutboardcursor == where && datas.game.state == 1) {
+                ctx.strokeStyle = '#00FF00';
+            }
+            else {
+                ctx.strokeStyle = '#000000';
+                if(selectedhorse == where && datas.game.state == 1) {
+                    ctx.strokeStyle = '#FFFFFF';
+                }
+            }
+            drawhorse(where);
+        });
+        datas.horses2.forEach(({where}) => {
+            ctx.fillStyle = '#FF0000';
+            if(yutboardcursor == where && datas.game.state == 1) {
+                ctx.strokeStyle = '#00FF00';
+            }
+            else {
+                ctx.strokeStyle = '#000000';
+                if(selectedhorse == where && datas.game.state == 1) {
+                    ctx.strokeStyle = '#FFFFFF';
+                }
+            }
+            drawhorse(where);
+        });
+        datas.horses1.forEach(({where,cango}) => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+            ctx.strokeStyle = '#0000FF';
+            if(selectedhorse == where && datas.game.state == 1) {
+                cango.forEach((value) => {
+                    if(value == -1) {
+                        ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+                        ctx.strokeStyle = '#FFFF00';
+                        drawhorse(20);
+                        anotheryut[20] -= 1;
+                        ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+                        ctx.strokeStyle = '#FF0000';
+                    }
+                    else {
+                        drawhorse(value);
+                        anotheryut[value] -= 1;
+                    }
+                });
+            }
+        });
+        datas.horses2.forEach(({where,cango}) => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+            ctx.strokeStyle = '#FF0000';
+            if(selectedhorse == where && datas.game.state == 1) {
+                cango.forEach((value) => {
+                    if(value == -1) {
+                        ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+                        ctx.strokeStyle = '#FFFF00';
+                        drawhorse(20);
+                        anotheryut[20] -= 1;
+                        ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+                        ctx.strokeStyle = '#FF0000';
+                    }
+                    else {
+                        drawhorse(value);
+                        anotheryut[value] -= 1;
+                    }
+                });
+            }
+        });
     }
 });
 function drawlobby() {
@@ -295,6 +534,7 @@ function drawroom() {
         { src: "char.png", x: 660, y: 130 },
         { src: "char.png", x: 980, y: 130 },
     ];
+    let isowner = false;
     {
         let i = 0;
         images.forEach(({ src, x, y }) => {
@@ -316,15 +556,43 @@ function drawroom() {
             i++;
         });
         i = 0;
-        ctx.fillStyle = '#000000';
         ctx.textAlign = "center";        // 정렬: left, center, right, start, end
         datas.players.forEach(({name}) => {
+            if(datas.players[i].roles == "leader") {
+                ctx.fillStyle = '#FF0000';
+                if(datas.players[i].name == datas.username) {
+                    isowner = true;
+                }
+            }
+            else {
+                ctx.fillStyle = '#000000';
+            }
             ctx.fillText(name,170 + (320 * i),115);
             i++;
         });
     }
+    if(room_out_hover) {
+        ctx.fillStyle = "#FF5555";
+    }
+    else {
+        ctx.fillStyle = "#FF2222";
+    }
+    drawRoundedRectangle(1445,5,150,40,20);
+    ctx.fillStyle = '#000000';
+    ctx.font = "25px Arial";         // 폰트 크기와 스타일
+    ctx.textAlign = "center";        // 정렬: left, center, right, start, end
+    ctx.fillText("나가기",1520,35);
+    ctx.fillStyle = '#00FF00';
+    if(isowner) {
+        drawRoundedRectangle(1290,5,150,40,20);
+        ctx.fillStyle = '#000000';
+        ctx.font = "25px Arial";         // 폰트 크기와 스타일
+        ctx.textAlign = "center";        // 정렬: left, center, right, start, end
+        ctx.fillText("게임 시작",1365,35);
+    }
 }
 function connect() {
+    let gamedatas = [];
     const ws = new WebSocket("wss://yut.corexaen.com:21543");
 
     ws.onopen = () => {
@@ -335,12 +603,20 @@ function connect() {
     ws.onmessage = (event) => {
         console.log("서버로부터 메시지:", event.data);
         const jsondata = JSON.parse(event.data);
-        datas = jsondata;
-        if(jsondata.state == 1) {
+        if(jsondata.answer == "error") {
+            datas = jsondata;
+            alert(jsondata.message);
+        }
+        else if(jsondata.state == 1) {
+            datas = jsondata;
             drawlobby();
         }
         else if(jsondata.state == 2) {
+            datas = jsondata;
             drawroom();
+        }
+        else if(jsondata.state == 3) {
+            gamedatas.push(jsondata);
         }
     };
     document.getElementById("makeroomForm").addEventListener("submit", async (e) => {
@@ -366,6 +642,7 @@ function connect() {
         // 논리 캔버스 좌표 계산
         const canvasX = cssX * scaleX;
         const canvasY = cssY * scaleY;
+        console.log(canvasX + "," + canvasY);
         if(datas.state == 1) {
             if(lobby_button_hover) {
                 document.body.style.cursor = "default";
@@ -382,7 +659,186 @@ function connect() {
                 }
             }
         }
+        else if(datas.state == 2) {
+            if(room_out_hover) {
+                const senddata = {
+                    request:"leaveroom"
+                };
+                ws.send(JSON.stringify(senddata));
+            }
+            if(room_start_hover) {
+                const senddata = {
+                    request:"start"
+                };
+                ws.send(JSON.stringify(senddata));
+            }
+        }
+        else if(datas.state == 3) {
+            if(1100 <= canvasX && canvasX <= 1550 && 380 <= canvasY && canvasY <= 460) {
+                if(datas.turn[0].name == datas.username && datas.game.state == 0) {
+                    const senddata = {
+                        request:"roll"
+                    };
+                    ws.send(JSON.stringify(senddata));
+                }
+            }
+            if(datas.turn[0].name == datas.username && datas.game.state == 1) {
+                if(yutboardcursor != -1) {
+                    if(selectedhorse != -1) {
+                        const senddata = {
+                            request:"move",
+                            firstpoint:selectedhorse,
+                            secondpoint:yutboardcursor
+                        }
+                        ws.send(JSON.stringify(senddata));
+                        selectedhorse = -1;
+                    }
+                    else {
+                        if(datas.turn[0].team == 1) {
+                            let isthere = false;
+                            datas.horses1.forEach(({where}) => {
+                                if(yutboardcursor == where) {
+                                    isthere = true;
+                                }
+                            });
+                            if(isthere) {
+                                selectedhorse = yutboardcursor;
+                            }
+                        }
+                        else {
+                            let isthere = false;
+                            datas.horses2.forEach(({where}) => {
+                                if(yutboardcursor == where) {
+                                    isthere = true;
+                                }
+                            });
+                            if(isthere) {
+                                selectedhorse = yutboardcursor;
+                            }
+                        }
+                    }
+                }
+                else {
+                    selectedhorse = -1;
+                }
+            }
+        }
     });
+    function gametherad() {
+        if(gamedatas.length > 0) {
+            const message = gamedatas.shift();
+            datas = message;
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0,0,1600,900);
+            drawyutboard();
+            yuts = message.yuts;
+            drawyut();
+            ctx.fillStyle = '#AAAAAA';
+            ctx.strokeStyle = '#555555';
+            drawRoundedRectangle(922,30,120,840,20);
+            for(let i = 0;i < message.turn.length;i++) {
+                if(message.turn[i].team == 1) {
+                    ctx.fillStyle = '#0000FF';
+                }
+                else {
+                    ctx.fillStyle = '#FF0000';
+                }
+                ctx.fillText(message.turn[i].name,982,70 + (30 * i));
+            }
+            if(message.turn[0].name == message.username && message.game.state == 0) {
+                ctx.fillStyle = '#B8FF89';
+                ctx.strokeStyle = '#888888';
+            }
+            else {
+                ctx.fillStyle = '#555555';
+            }
+            drawRoundedRectangle(1100,380,450,80,20);
+            ctx.fillStyle = '#000000';
+            ctx.fillText("던지기",1325,430);
+            for(let i = 0;i<message.results.length;i++) {
+                if(message.results[i] == -1) {
+                    message.results[i] = 6;
+                }
+                ctx.fillStyle = '#AAAAAA';
+                ctx.strokeStyle = '#555555';
+                drawRoundedRectangle(922,810 + (-50 * i),120,40,10);
+                ctx.fillStyle = '#000000';
+                ctx.fillText(yutname[message.results[i]],982,840 + (-50 * i));
+            }
+            drawyutboard();
+            anotheryut.fill(0);
+            pos0rand = seededRandomGenerator(13324248123);
+            ctx.lineWidth = 2;
+            datas.horses1.forEach(({where}) => {
+                ctx.fillStyle = '#0000FF';
+                if(yutboardcursor == where && datas.game.state == 1) {
+                    ctx.strokeStyle = '#00FF00';
+                }
+                else {
+                    ctx.strokeStyle = '#000000';
+                    if(selectedhorse == where && datas.game.state == 1) {
+                        ctx.strokeStyle = '#FFFFFF';
+                    }
+                }
+                drawhorse(where);
+            });
+            datas.horses2.forEach(({where}) => {
+                ctx.fillStyle = '#FF0000';
+                if(yutboardcursor == where && datas.game.state == 1) {
+                    ctx.strokeStyle = '#00FF00';
+                }
+                else {
+                    ctx.strokeStyle = '#000000';
+                    if(selectedhorse == where && datas.game.state == 1) {
+                        ctx.strokeStyle = '#FFFFFF';
+                    }
+                }
+                drawhorse(where);
+            });
+            datas.horses1.forEach(({where,cango}) => {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+                ctx.strokeStyle = '#0000FF';
+                if(selectedhorse == where && datas.game.state == 1) {
+                    cango.forEach((value) => {
+                        if(value == -1) {
+                            ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+                            ctx.strokeStyle = '#FFFF00';
+                            drawhorse(20);
+                            anotheryut[20] -= 1;
+                            ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+                            ctx.strokeStyle = '#FF0000';
+                        }
+                        else {
+                            drawhorse(value);
+                            anotheryut[value] -= 1;
+                        }
+                    });
+                }
+            });
+            datas.horses2.forEach(({where,cango}) => {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+                ctx.strokeStyle = '#FF0000';
+                if(selectedhorse == where && datas.game.state == 1) {
+                    cango.forEach((value) => {
+                        if(value == -1) {
+                            ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+                            ctx.strokeStyle = '#FFFF00';
+                            drawhorse(20);
+                            anotheryut[20] -= 1;
+                            ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+                            ctx.strokeStyle = '#FF0000';
+                        }
+                        else {
+                            drawhorse(value);
+                            anotheryut[value] -= 1;
+                        }
+                    });
+                }
+            });
+        }
+        requestAnimationFrame(gametherad);
+    }
+    requestAnimationFrame(gametherad);
     return ws;
 }
 function showLogin() {
@@ -516,7 +972,7 @@ document.getElementById('loginForm').addEventListener("submit", async (e) => {
         });
         const result = await response.json();
         if(result.answer == 'error') {
-            alert("아이디 또는 비밀번호가 틀렸습니다.");
+            alert(result.message);
         }
         else {
             setCookie("uid",result.uid,10);
@@ -549,7 +1005,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
             });
             const result = await response.json();
             if(result.answer == 'error') {
-                alert("이미 존재하는 아이디이거나 특수기호가 포함되어있습니다");
+                alert(result.message);
             }
             else {
                 setCookie("uid",result.uid,10);
