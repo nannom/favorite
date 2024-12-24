@@ -1028,33 +1028,3 @@ if(uid == null) {
 else {
     connect();
 }
-function updateViewportSize() {
-            const body = document.body;
-            const message = document.getElementById('message');
-
-            // 현재 화면의 가로, 세로 크기를 계산
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-
-            // 화면 방향에 따라 vw/vh를 재설정
-            if (width < height) {
-                // 세로 모드일 경우
-                document.documentElement.style.setProperty('--vw', `${height}px`);
-                document.documentElement.style.setProperty('--vh', `${width}px`);
-                body.style.transform = 'rotate(90deg)';
-                message.style.display = 'block';
-            } else {
-                // 가로 모드일 경우
-                document.documentElement.style.setProperty('--vw', `${width}px`);
-                document.documentElement.style.setProperty('--vh', `${height}px`);
-                body.style.transform = 'rotate(0deg)';
-                message.style.display = 'none';
-            }
-        }
-
-        // 초기 크기 설정
-        updateViewportSize();
-
-        // 화면 방향 변경 감지
-        window.addEventListener('resize', updateViewportSize);
-        window.addEventListener('orientationchange', updateViewportSize);
