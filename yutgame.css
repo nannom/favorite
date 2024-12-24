@@ -1,3 +1,14 @@
+:root {
+            --vw: 100vw;
+            --vh: 100vh;
+        }
+
+        body {
+            margin: 0;
+            width: var(--vw);
+            height: var(--vh);
+            transition: transform 0.3s ease-in-out;
+        }
 /* 화면을 덮는 반투명 검은색 배경 */
 .overlay {
     position: fixed;
